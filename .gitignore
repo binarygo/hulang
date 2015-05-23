@@ -1,0 +1,8 @@
+*~
+*.o
+*.so
+*.tsk
+*.exe
+*.dll
+*.com
+*.class
