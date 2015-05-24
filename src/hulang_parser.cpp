@@ -57,7 +57,7 @@ bool Parser::test(TokenType::Value tokenType, bool must)
 }
     
 bool Parser::test(TokenType::Value* t, TokenType::Value tokenType, bool must)
-{   
+{
     if(tokenType == d_it.token().type())
     {
         ++d_it;
@@ -470,7 +470,8 @@ bool Parser::primaryExpr(AstExprNode::SP& ans, bool must)
         return true;
     }
     else if(test(&type, TokenType::INTEGER, false) ||
-            test(&type, TokenType::FLOAT, false))
+            test(&type, TokenType::FLOAT, false) ||
+            test(&type, TokenType::STRING, false))
     {
         ans =
             std::make_shared< AstLiteralNode >(

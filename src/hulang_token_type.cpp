@@ -21,6 +21,10 @@ bool TokenType::fromInt(Value* v, int i)
             *v = FLOAT;
             return true;
         } break;
+        case STRING: {
+            *v = STRING;
+            return true;
+        } break;
         case QMARK: {
             *v = QMARK;
             return true;
@@ -157,6 +161,11 @@ bool TokenType::fromString(Value* v, const std::string& s)
     if(s == "FLOAT")
     {
         *v = FLOAT;
+        return true;
+    }
+    if(s == "STRING")
+    {
+        *v = STRING;
         return true;
     }
     if(s == "QMARK")
@@ -318,6 +327,7 @@ std::string TokenType::toString(Value v)
         case ID: return "ID";
         case INTEGER: return "INTEGER";
         case FLOAT: return "FLOAT";
+        case STRING: return "STRING";
         case QMARK: return "QMARK";
         case COLON: return "COLON";
         case ASSIGN: return "ASSIGN";

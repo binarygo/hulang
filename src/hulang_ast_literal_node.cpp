@@ -8,7 +8,8 @@ bool AstLiteralNode::isValidTokenType(TokenType::Value type)
 {
     return
         type == TokenType::INTEGER ||
-        type == TokenType::FLOAT;
+        type == TokenType::FLOAT ||
+        type == TokenType::STRING;
 }
 
 // CREATORS

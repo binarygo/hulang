@@ -25,6 +25,7 @@ float    {integer}?\.[[:digit:]]+
 {id}        { return HULANG_TOKEN_TYPE_ID; }
 {integer}   { return HULANG_TOKEN_TYPE_INTEGER; }
 {float}     { return HULANG_TOKEN_TYPE_FLOAT; }
+\"(\\.|[^\\"])*\" { return HULANG_TOKEN_TYPE_STRING; }
 "?"         { return HULANG_TOKEN_TYPE_QMARK; }
 ":"         { return HULANG_TOKEN_TYPE_COLON; }
 "="         { return HULANG_TOKEN_TYPE_ASSIGN; }
@@ -56,7 +57,7 @@ float    {integer}?\.[[:digit:]]+
                 int c = 0;
                 while(0 != (c = input(yyscanner)))
                 {
-                    if(c == '*')
+                    if('*' == c)
                     {
                         c = input(yyscanner);
                         if('/' == c) break;

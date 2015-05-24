@@ -9,22 +9,59 @@ namespace hulang {
 
 TEST(Parser, lexer)
 {
-    std::istringstream iss("(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy");
-    StreamReader streamReader(iss);
-    Lexer lexer(&streamReader);
-
-    Lexer::Iter it = lexer.begin();
-    while(it != lexer.end())
     {
-        std::cout << it.token() << std::endl;
-        ++it;
+        std::string s = "(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy";
+        std::cout << s << std::endl;
+
+        std::istringstream iss(s);
+        StreamReader streamReader(iss);
+        Lexer lexer(&streamReader);
+        
+        Lexer::Iter it = lexer.begin();
+        while(it != lexer.end())
+        {
+            std::cout << it.token() << std::endl;
+            ++it;
+        }
+        std::cout << "----------" << std::endl;
+    }
+    {
+        std::string s = "\"ab\\\"c\"";
+        std::cout << s << std::endl;
+        
+        std::istringstream iss(s);
+        StreamReader streamReader(iss);
+        Lexer lexer(&streamReader);
+        
+        Lexer::Iter it = lexer.begin();
+        while(it != lexer.end())
+        {
+            std::cout << it.token() << std::endl;
+            ++it;
+        }
+        std::cout << "----------" << std::endl;
+    }
+    {
+        std::string s = "(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy\n + \"xyz\"* 3";
+        std::cout << s << std::endl;
+        
+        std::istringstream iss(s);
+        StreamReader streamReader(iss);
+        Lexer lexer(&streamReader);
+        
+        Lexer::Iter it = lexer.begin();
+        while(it != lexer.end())
+        {
+            std::cout << it.token() << std::endl;
+            ++it;
+        }
+        std::cout << "----------" << std::endl;
     }
 }
     
 TEST(Parser, condExpr)
 {
     std::istringstream iss("(12 && 9 ? (_x+_y ? 1:2) : _z*5) ? 1 : 2");
-    // std::istringstream iss("1 ? a?c:d : 3 ? 4 : 5");
 
     Parser parser(iss);
     AstNode::SP root;
@@ -37,7 +74,10 @@ TEST(Parser, condExpr)
     
 TEST(Parser, expr)
 {
-    std::istringstream iss("(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy");
+    std::string s = "(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy\n + \"xyz\"* 3";
+    std::cout << s << std::endl;
+    
+    std::istringstream iss(s);
     
     Parser parser(iss);
     AstNode::SP root;

@@ -46,7 +46,7 @@ private:
       unary_expr <- postfix_expr
                   / ("+"|"-"|"!"|"++"|"--") unary_expr
       postfix_expr <- primary_expr ("++"|"--")*
-      primary_expr <- ID | INTEGER | FLOAT | "(" expr ")"
+      primary_expr <- ID | INTEGER | FLOAT | STRING | "(" expr ")"
      */
     // MANIPULATORS
     bool prog(AstNode::SP& ans, bool must);
