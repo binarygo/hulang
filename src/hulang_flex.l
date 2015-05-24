@@ -52,6 +52,22 @@ float    {integer}?\.[[:digit:]]+
 "^"         { return HULANG_TOKEN_TYPE_POWER; }
 "("         { return HULANG_TOKEN_TYPE_LPAR; }
 ")"         { return HULANG_TOKEN_TYPE_RPAR; }
+"/*"        {
+                int c = 0;
+                while(0 != (c = input(yyscanner)))
+                {
+                    if(c == '*')
+                    {
+                        c = input(yyscanner);
+                        if('/' == c) break;
+                        else unput(c);
+                    }
+                }
+            }
+"//"        {
+                int c = 0;
+                while(0 != (c = input(yyscanner)) && '\n' != c);
+            }
 <<EOF>>     { return HULANG_TOKEN_TYPE_EOS; }
 .           { return HULANG_TOKEN_TYPE_ERROR; }
 

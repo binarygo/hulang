@@ -328,7 +328,7 @@ extern int hulang_yylex (yyscan_t yyscanner);
 #undef YY_DECL
 #endif
 
-#line 59 "hulang_flex.l"
+#line 75 "hulang_flex.l"
 
 
 #line 335 "hulang_flex_lexer.h"

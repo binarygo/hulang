@@ -7,6 +7,20 @@
 
 namespace hulang {
 
+TEST(Parser, lexer)
+{
+    std::istringstream iss("(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy");
+    StreamReader streamReader(iss);
+    Lexer lexer(&streamReader);
+
+    Lexer::Iter it = lexer.begin();
+    while(it != lexer.end())
+    {
+        std::cout << it.token() << std::endl;
+        ++it;
+    }
+}
+    
 TEST(Parser, condExpr)
 {
     std::istringstream iss("(12 && 9 ? (_x+_y ? 1:2) : _z*5) ? 1 : 2");
@@ -23,7 +37,7 @@ TEST(Parser, condExpr)
     
 TEST(Parser, expr)
 {
-    std::istringstream iss("(12.2+0*-3.2)/\n5.6^3^y*9+_x+15");
+    std::istringstream iss("(12.2+0*-3.2)/\n5.6^3^y*9+_x+15 //yyy");
     
     Parser parser(iss);
     AstNode::SP root;
@@ -36,7 +50,10 @@ TEST(Parser, expr)
 
 TEST(Parser, error)
 {
-    std::istringstream iss("1+*2");
+    std::string s = "//abc\n//cde\n/* x\nxy\nxyz */\n//aksdf9\n1+*2";
+    std::cout << s << std::endl;
+    
+    std::istringstream iss(s);
     
     Parser parser(iss);
     AstNode::SP root;
