@@ -3,8 +3,8 @@ CC=gcc
 
 PROG=hulang
 
-INCLUDES=-I.
-LD_FLAGS=
+INCLUDES=-I. -I../yapeg
+LD_FLAGS=-L../yapeg -lyapeg
 
 IS_GTEST=yes
 GTEST_DIR=../gtest
